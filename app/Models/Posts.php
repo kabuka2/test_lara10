@@ -11,9 +11,13 @@ class Posts extends Model
 
     protected $table = 'posts';
 
+    const STATUS_POST_ACTIVE = 1;
+    const STATUS_POST_DEACTIVATED = 1;
+    const NUMBER_RECORDS_ONE_PAGE = 15;
+
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comments::class, 'post_id', 'id');
     }
 
 }

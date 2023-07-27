@@ -3,20 +3,20 @@
 
 namespace App\Http\Services;
 use App\Http\Repositories\PostsRepository;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostsService extends CoreService
 {
-    private PostsService $repository;
+    private PostsRepository $repository;
 
     public function __construct()
     {
         $this->repository = new PostsRepository();
     }
 
-    public function getAllPosts()
+    public function getAllPostsPagination():LengthAwarePaginator
     {
-
+       return $this->repository->getAllPostsPagination();
     }
 
     /**
