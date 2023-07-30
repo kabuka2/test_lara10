@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\PostsService;
+use App\Http\Requests\ShowFromUserPageRequest;
 
 class PostController extends Controller
 {
@@ -45,6 +46,16 @@ class PostController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    public function showFromUserPage(ShowFromUserPageRequest $request)
+    {
+
+        $id = $request->id;
+        $res = $this->service->getPostAndCommentsById($id);
+
+        dd($res);
+
     }
 
     /**

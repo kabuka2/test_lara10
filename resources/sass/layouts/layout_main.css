@@ -1,0 +1,62 @@
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: calc(-1 * var(--header-full-height) + var(--header-collaped-height));
+  min-width: 900px;
+  min-height: 64px;
+  z-index: 5000;
+  color: var(--color-black-940);
+  box-shadow: var(--shadow-mobi);
+  transform: translate3d(0, 0, 0);
+}
+header .dashboard_main {
+  transition: background-color 200ms ease-out;
+  width: 100%;
+  height: 64px;
+  background-color: var(--color-bright-800);
+}
+header .dashboard_main > .header__inner {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  min-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 64px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+header .dashboard_main > .header__inner > .header__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  justify-content: space-around;
+}
+
+body {
+  background-color: var(--color-black-300);
+  color: var(--color-black-940);
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+  overflow-y: scroll;
+}
+body > main {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+body > main > .app-container {
+  flex: 1;
+  min-width: 900px;
+  position: relative;
+  max-width: 1020px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/*# sourceMappingURL=layout_main.css.map */

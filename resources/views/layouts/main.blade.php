@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+</head>
+
+<header>
+    <div class="dashboard_main">
+        <div class="header__inner">
+            <div class="header__wrapper">
+
+                <div class="header__item header__logo">
+                    Logo
+                </div>
+
+                <div class="header__menu">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class=>Dashboard</a>
+                    @endauth
+                </div>
+                <div class="header__item header__right-menu">
+                    @auth
+                        <a href="{{ url('/logout') }}" class=>Dashboard</a>
+                    @else
+                        <div class="f-login-nav">
+                            <a href="{{ route('login') }}" >Log in</a>
+                            <a href="{{ route('register') }}">Register</a>
+                        </div>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body class="font-sans antialiased">
+<!-- Page Heading -->
+    @if (isset($header))
+        <header class="bg-white dark:bg-gray-800 shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+    @endif
+
+<!-- Page Content -->
+    <main>
+        <div class="app-container">
+        {{ $slot }}
+        </div>
+    </main>
+</div>
+</body>
+
+<footer>
+
+
+
+
+</footer>
+
+</html>

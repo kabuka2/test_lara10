@@ -20,6 +20,14 @@ class PostsService extends CoreService
     }
 
     /**
+     * @param int $id_post
+     */
+    public function getPostAndCommentsById(int $id_post)
+    {
+        return $this->repository->getAllPostsAndComments($id_post);
+    }
+
+    /**
      * @inheritDoc
      */
     protected function errors(): array

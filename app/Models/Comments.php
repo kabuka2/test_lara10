@@ -10,4 +10,8 @@ class Comments extends Model
     use HasFactory;
     protected $table = 'comments';
 
+    public function user()
+    {
+        return $this->hasMany(User::class, 'id', 'user_id');
+    }
 }

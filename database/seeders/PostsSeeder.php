@@ -17,7 +17,7 @@ class PostsSeeder extends Seeder
 
         for ($i = 0; $i < 1000; $i++) {
             $arr[] = [
-                'author' => 1,
+                'user_id' => 1,
                 'name' => Str::random(10),
                 'href' => '#',
                 'image' => '/images/posts/7f3de99d94ed6b6b2a1cdcc449bf4f52.jpg',

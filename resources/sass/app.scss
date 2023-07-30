@@ -1,1 +1,14 @@
+@import "/node_modules/normalize.css/normalize.css";
 @import "/resources/css/app.css";
+@import "/resources/sass/pages/welcome_page";
+@import "/resources/sass/layouts/layout_main";
+
+:root{
+    --color--text--header:blue;
+    --header-full-height: 64px;
+    --header-collaped-height: 2px;
+    --color-black-940:#e0e3ea;
+    --shadow-mobi: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --color-bright-800: #262b30;
+    --color-black-300: #22272b;
+}

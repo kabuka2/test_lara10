@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\SiteController;
-
+use \App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +15,12 @@ use \App\Http\Controllers\SiteController;
 |
 */
 
-Route::get('/', SiteController::class);
+
+
+Route::middleware(['web','guest'])->group(function(){
+    Route::get('/', SiteController::class);
+    Route::get('/posts/{id}', [PostController::class, 'showFromUserPage'])->name('post.user.show');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

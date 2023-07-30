@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id('id')->unique();
-            $table->unsignedBigInteger('author')->unsigned();
+            $table->unsignedBigInteger('user_id');
             $table->string('name', 100);
             $table->string('href', 250);
             $table->string('image', 250);
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->tinyInteger('status')->unsigned()->default(1);
             $table->timestamps();
 
-            $table->foreign('author')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
         });
