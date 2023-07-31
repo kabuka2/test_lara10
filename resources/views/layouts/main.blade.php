@@ -20,12 +20,16 @@
 
                 <div class="header__menu">
                     @auth
+                        <a href="{{url('profile')}}">Profile</a>
                         <a href="{{ url('/dashboard') }}" class=>Dashboard</a>
+                        <a href="{{ route('users') }}" class=>Users</a>
+                        <a href="{{ route('post_list') }}" class=>Posts</a>
                     @endauth
                 </div>
                 <div class="header__item header__right-menu">
                     @auth
-                        <a href="{{ url('/logout') }}" class=>Dashboard</a>
+{{--                        @include('layouts.navigation')--}}
+                        <a href="{{ url('/logout') }}" class=>Logout</a>
                     @else
                         <div class="f-login-nav">
                             <a href="{{ route('login') }}" >Log in</a>

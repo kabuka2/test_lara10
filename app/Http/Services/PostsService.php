@@ -2,6 +2,7 @@
 
 
 namespace App\Http\Services;
+
 use App\Http\Repositories\PostsRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -12,6 +13,11 @@ class PostsService extends CoreService
     public function __construct()
     {
         $this->repository = new PostsRepository();
+    }
+
+    public function getAllPostGrid()
+    {
+       return $this->repository->getAllPostGridTable();
     }
 
     public function getAllPostsPagination():LengthAwarePaginator
@@ -27,13 +33,22 @@ class PostsService extends CoreService
         return $this->repository->getAllPostsAndComments($id_post);
     }
 
+    public function softDelete(int $id)
+    {
+        try {
+            $this->repository->softDeleteRecords($id);
+        } catch (\Exception $e) {
+            $this->error(0,$e->getMessage());
+        }
+    }
+
     /**
      * @inheritDoc
      */
     protected function errors(): array
     {
         return [
-            0 => ['code' => 1, 'message'=> 'Undefined error'],
+            0 => ['code' => 400, 'message'=> 'Undefined error'],
         ];
     }
 }

@@ -20,7 +20,9 @@ class PostController extends Controller
      */
     public function index()
     {
-       $data = $this->service->getAllPosts();
+       $dataProvider = $this->service->getAllPostGrid();
+
+       return view('post_list',['dataProvider'=> $dataProvider]);
 
     }
 
@@ -29,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post');
     }
 
     /**
@@ -52,9 +54,9 @@ class PostController extends Controller
     {
 
         $id = $request->id;
-        $res = $this->service->getPostAndCommentsById($id);
+        $post = current($this->service->getPostAndCommentsById($id));
 
-        dd($res);
+        return view('post_page', ['post' => current($post)]);
 
     }
 
@@ -77,8 +79,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ShowFromUserPageRequest $request)
     {
-        //
+        $id = $request->id;
+        $this->service->softDelete($id);
+        return redirect('post-list');
     }
 }

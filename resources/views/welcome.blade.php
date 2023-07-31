@@ -2,6 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <x-main-layout>
     <div class="posts-block">
+        @auth
+            <a class = "create_post" href="{{route('posts.create')}}">
+                Create Post
+            </a>
+        @endauth
         @foreach ($data->withPath('/') as $post)
             <div class="posts-block-post">
                 <div class="story__header">

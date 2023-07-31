@@ -14,22 +14,67 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 1000; $i++) {
-            $parentId = ($i % 2 === 0) ? null : rand(1, $i);
-            $postId = $i + 1;
-            $content = Str::random(100);
-            $status = rand(0, 1);
 
-            $data[] = [
-                'parent_id' => $parentId,
+
+        $data = [
+            [ // 1
+                'parent_id' => null,
                 'user_id' => 1,
-                'post_id' => $postId,
-                'content' => $content,
-                'status' => $status,
+                'post_id' => 1,
+                'content' => Str::random(20),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
-            ];
-        }
+            ],
+            [ // 2
+                'parent_id' => 1,
+                'user_id' => 1,
+                'post_id' => 1,
+                'content' => Str::random(20),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [ //3
+                'parent_id' => 2,
+                'user_id' => 1,
+                'post_id' => 1,
+                'content' => Str::random(20),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [ // 4
+                'parent_id' => null,
+                'user_id' => 1,
+                'post_id' => 1,
+                'content' => Str::random(20),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [ //5
+                'parent_id' => null,
+                'user_id' => 1,
+                'post_id' => 2,
+                'content' => Str::random(20),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [ // 6
+                'parent_id' => 5,
+                'user_id' => 1,
+                'post_id' => 2,
+                'content' => Str::random(20),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+            [ // 7
+                'parent_id' => null,
+                'user_id' => 1,
+                'post_id' => 2,
+                'content' => Str::random(20),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ],
+        ];
+
 
         DB::table('comments')->insert($data);
     }
