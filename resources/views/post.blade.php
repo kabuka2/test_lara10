@@ -3,6 +3,13 @@
     <x-main-layout>
 
 
+
+
+
+        <x-post_create>
+
+
+        </x-post_create>
 {{--        @include('components.users_table', ['dataProvider' => $dataProvider])--}}
 
 

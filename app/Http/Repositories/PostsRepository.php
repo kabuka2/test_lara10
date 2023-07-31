@@ -2,11 +2,15 @@
 
 
 namespace App\Http\Repositories;
+use App\Http\Requests\PostCreateRequest;
 use App\Models\Comments;
 use App\Models\Posts as Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class PostsRepository extends CoreRepository
 {
@@ -91,6 +95,37 @@ class PostsRepository extends CoreRepository
        $post = $this->startCondition()::find($id);
        $post->comments()->delete();
        $post->delete();
+    }
+
+    /**
+     * @param PostCreateRequest $data *
+     * @return int id new records
+     */
+    public function createNewRecords(PostCreateRequest $data):int
+    {
+       DB::beginTransaction();
+
+       try {
+           $user = Auth::user();
+           $model = $this->startCondition();
+           $model->name = $data->input('name');
+           $model->body = $data->input('body');
+           $model->some_body = serialize($data->input('body'));
+           $model->user_id = $user->id;
+           if (isset($data->image_path)) {
+               $model->image = $data->image_path;
+           }
+           $model->save();
+
+           DB::commit();
+
+           return $model->id;
+       } catch (QueryException $e){
+           DB::rollback();
+           throw new \Exception($e->getMessage(), 1);
+       }
+
+
     }
 
 

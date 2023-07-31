@@ -17,7 +17,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::middleware(['web'])->group(function(){
-    Route::get('/', SiteController::class);
+    Route::get('/', SiteController::class)->name('home');
 });
 
 Route::get('/dashboard', function () {
@@ -26,9 +26,11 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/users', UserController::class)->name('users');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/profile_edit/{id}', [ProfileController::class, 'profileEdit'])->name('profile.edit_user');
+
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

@@ -29,13 +29,5 @@
                 </div>
             </div>
         </div>
-
-        <div>
-
-        </div>
-
-
-
-
     </x-main-layout>
 </html>

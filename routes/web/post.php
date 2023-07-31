@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/post-list', 'PostController@index')->name('post_list');
     Route::match(['delete','get'],'/post-delete/{id}', 'PostController@destroy')->name('post_delete');
     Route::get('/posts-create', 'PostController@create')->name('posts.create');
+    Route::put('/posts-add', 'PostController@store')->name('posts.store');
 });
 
 

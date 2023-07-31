@@ -19,7 +19,6 @@ class PostsSeeder extends Seeder
             $arr[] = [
                 'user_id' => 1,
                 'name' => Str::random(10),
-                'href' => '#',
                 'image' => '/images/posts/7f3de99d94ed6b6b2a1cdcc449bf4f52.jpg',
                 'some_body' => $this->generateRandomBody(),
                 'body' => $this->generateRandomBody(),

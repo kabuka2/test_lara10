@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Services\PostsService;
 use App\Http\Requests\ShowFromUserPageRequest;
+use App\Http\Requests\PostCreateRequest;
+use Illuminate\Support\Facades\Redirect;
 
 class PostController extends Controller
 {
@@ -37,9 +39,23 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostCreateRequest $request)
     {
-        //
+        $data = $request;
+        try {
+            $res =  $this->service->savePost($data);
+
+            return redirect()->route(
+                'post.user.show',
+                [
+                    'id' => $res['id']
+                ]
+            )->with('success', 'Item saved successfully.');
+
+        } catch (\Exception){
+            return view('post')->withErrors(['error' => 'Failed to save the item. Please try again.']);
+        }
+
     }
 
     /**

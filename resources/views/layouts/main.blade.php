@@ -20,8 +20,9 @@
 
                 <div class="header__menu">
                     @auth
-                        <a href="{{url('profile')}}">Profile</a>
-                        <a href="{{ url('/dashboard') }}" class=>Dashboard</a>
+
+                        <a href="{{route('home')}}">Home</a>
+                        <a href="{{route('profile.edit')}}">My Profile</a>
                         <a href="{{ route('users') }}" class=>Users</a>
                         <a href="{{ route('post_list') }}" class=>Posts</a>
                     @endauth
