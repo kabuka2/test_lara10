@@ -3,7 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\SiteController;
-use \App\Http\Controllers\PostController;
+
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,11 +16,8 @@ use \App\Http\Controllers\PostController;
 |
 */
 
-
-
-Route::middleware(['web','guest'])->group(function(){
+Route::middleware(['web'])->group(function(){
     Route::get('/', SiteController::class);
-    Route::get('/posts/{id}', [PostController::class, 'showFromUserPage'])->name('post.user.show');
 });
 
 Route::get('/dashboard', function () {
@@ -28,9 +26,14 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/users', UserController::class)->name('users');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile_edit/{id}', [ProfileController::class, 'profileEdit'])->name('profile.edit_user');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
 require __DIR__.'/auth.php';
+require __DIR__.'/post.php';

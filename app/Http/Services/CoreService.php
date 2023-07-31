@@ -22,7 +22,7 @@ abstract class CoreService
          * @param bool $return  true - return Exception, false - array
          * @return \Exception or array
      **/
-    protected function _error(int $code, string $message_error = '', bool $return = false)
+    protected function error(int $code, string $message_error = '', bool $return = false)
     {
         $errors = $this->errors();
 

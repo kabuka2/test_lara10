@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('image', 250);
             $table->text('some_body');
             $table->text('body');
-            $table->tinyInteger('status')->unsigned()->default(1);
+            $table->softDeletes();
             $table->timestamps();
+
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->charset = 'utf8mb4';

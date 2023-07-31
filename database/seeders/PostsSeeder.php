@@ -23,7 +23,6 @@ class PostsSeeder extends Seeder
                 'image' => '/images/posts/7f3de99d94ed6b6b2a1cdcc449bf4f52.jpg',
                 'some_body' => $this->generateRandomBody(),
                 'body' => $this->generateRandomBody(),
-                'status' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
@@ -41,7 +40,7 @@ class PostsSeeder extends Seeder
 
         for ($i = 0; $i < $numberOfWords; $i++) {
             $randomWord = Str::random($wordsLength);
-            $randomBody .= ($i === 0) ? $randomWord : $separator . $randomWord;
+            $randomBody .= ($i === 0) ? $randomWord : sprintf('%s%s',$separator,$randomWord);
         }
 
         return $randomBody;

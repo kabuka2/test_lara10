@@ -17,8 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
             $table->string('content');
-            $table->tinyInteger('status')->unsigned()->default(1);
+            $table->softDeletes();
             $table->timestamps();
+
 
             $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
