@@ -4,11 +4,11 @@
         'pageName' => 'p'
     ],
     'rowsPerPage' => 5,
-    'strictFilters' => true,
+    'strictFilters' => false,
     'rowsFormAction' => route('users'),
     'columnOptions' => [
         'class' => 'attribute',
-        'sortable' => false,
+        'sortable' => true,
     ],
     'columnFields' => [
         'id' => [
@@ -69,7 +69,6 @@
         [ // Set Action Buttons.
             'class' => Itstructure\GridView\Columns\ActionColumn::class, // REQUIRED.
             'actionTypes' => [
-                'view',
                 'edit' => function ($data) {
                     return route('profile.edit_user', ['id' => $data->id]);
                 },

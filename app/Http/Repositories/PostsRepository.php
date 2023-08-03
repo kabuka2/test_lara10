@@ -5,8 +5,10 @@ namespace App\Http\Repositories;
 use App\Http\Requests\PostCreateRequest;
 use App\Models\Comments;
 use App\Models\Posts as Model;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -19,17 +21,21 @@ class PostsRepository extends CoreRepository
         return Model::class;
     }
 
-    public function getAllPostsPagination():LengthAwarePaginator
+    public function getAllPostsPagination($filter):LengthAwarePaginator
     {
-        $posts = Model::select(['id','user_id','name','image','body','created_at','updated_at'])
+        $posts = $this->startCondition()::select(['id','user_id','name','image','body','created_at','updated_at'])
+            ->where('date_publish', '<', DB::raw('NOW()'))
+            ->orWhere('date_publish', null)
             ->withCount('comments')
             ->with(['user'=> function($query){
                 $query->select(['name','id']);
             }])
+            ->orderBy('date_publish', 'DESC')
+            ->orderBy('created_at', 'DESC')
+            ->filter($filter)
             ->paginate(Model::NUMBER_RECORDS_ONE_PAGE);
         return $posts;
     }
-
 
     /**
      * @param $post_id
@@ -37,7 +43,7 @@ class PostsRepository extends CoreRepository
     **/
     public function getAllPostsAndComments(int $post_id):Collection
     {
-        $posts = Model::select([
+        $posts = $this->startCondition()::select([
                 'posts.id',
                 'posts.user_id',
                 'posts.name',
@@ -74,10 +80,8 @@ class PostsRepository extends CoreRepository
 
         foreach ($comments as $comment_value) {
             if ($comment_value->parent_id === $parentId) {
-
                 $comment_value->children = $this->buildCommentTree($comments, $comment_value->id);
                 $branch[] = $comment_value;
-
             }
         }
 
@@ -89,12 +93,20 @@ class PostsRepository extends CoreRepository
         return new EloquentDataProvider($this->startCondition()::query());
     }
 
-    public function softDeleteRecords(int $id)
+    /**
+     * @param $id*
+     * @return bool
+     */
+    public function softDeleteRecords(int $id):bool
     {
-
-       $post = $this->startCondition()::find($id);
+       $post = $this->getModelById($id);
+       if (empty($post)) {
+            return false;
+       }
        $post->comments()->delete();
        $post->delete();
+
+       return true;
     }
 
     /**
@@ -103,6 +115,12 @@ class PostsRepository extends CoreRepository
      */
     public function createNewRecords(PostCreateRequest $data):int
     {
+
+        if ($data->hasFile('image')) {
+            $image = $data->file('image');
+            $data->image_path = $this->saveFilesImages($image);
+        }
+
        DB::beginTransaction();
 
        try {
@@ -112,6 +130,7 @@ class PostsRepository extends CoreRepository
            $model->body = $data->input('body');
            $model->some_body = serialize($data->input('body'));
            $model->user_id = $user->id;
+
            if (isset($data->image_path)) {
                $model->image = $data->image_path;
            }
@@ -121,14 +140,93 @@ class PostsRepository extends CoreRepository
 
            return $model->id;
        } catch (QueryException $e){
+
+           if(isset($data->image_path)) {
+               $this->unlinkFileImage($data->image_path);
+           }
+
            DB::rollback();
            throw new \Exception($e->getMessage(), 1);
        }
 
+    }
+
+    /**
+     * @param int $id_post
+     * @return Model|null
+    **/
+    public function getModelById(int $id_post):Model|null
+    {
+         return $this->startCondition()::find($id_post);
+    }
+
+    public function updatePost(int $post_id, PostCreateRequest $data )
+    {
+
+        $model = $this->getModelById($post_id);
+
+        throw_if(empty($model),'Undefined records');
+
+        if ($data->hasFile('image')) {
+            $image = $data->file('image');
+            $model->image = $this->saveFilesImages($image);
+        }
+
+        DB::beginTransaction();
+
+        try {
+
+            $user = Auth::user();
+            $model->name = $data->input('name');
+            $model->body = $data->input('body');
+            $model->some_body = serialize($data->input('body'));
+            $model->user_id = $user->id;
+            $model->save();
+
+            DB::commit();
+
+            return $model->id;
+        } catch (QueryException $e){
+
+            if(isset($data->image_path)) {
+                $this->unlinkFileImage($model->image);
+            }
+
+            DB::rollback();
+            throw new \Exception($e->getMessage(), 1);
+        }
+
 
     }
 
+    /**
+     * @param UploadedFile $file
+     * @return string path to file
+     */
+    private function saveFilesImages(UploadedFile $file):string
+    {
+        $image_name_info = pathinfo($file->getClientOriginalName());
+        $new_image_name = sprintf('%s.%s',
+            md5($image_name_info['filename'].time()),
+            $image_name_info['extension']
+        );
 
+        Storage::disk('public')->putFileAs('images\posts', $file, $new_image_name);
+        Storage::setVisibility($new_image_name, 'public');
+
+        $publicUrl = asset('storage/images/posts/'.$new_image_name);
+        $publicUrlWithoutBase = str_replace(url('/'), '', $publicUrl);
+        return $publicUrlWithoutBase;
+    }
+
+    private function unlinkFileImage(string $path_file):void
+    {
+        $path = pathinfo($path_file);
+        try{
+            Storage::delete($path['basename']);
+        } catch (\Exception $e){}
+
+    }
 
 
 

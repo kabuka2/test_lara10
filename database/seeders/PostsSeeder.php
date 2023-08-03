@@ -15,13 +15,14 @@ class PostsSeeder extends Seeder
     {
         $arr = [];
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $arr[] = [
                 'user_id' => 1,
                 'name' => Str::random(10),
                 'image' => '/images/posts/7f3de99d94ed6b6b2a1cdcc449bf4f52.jpg',
                 'some_body' => $this->generateRandomBody(),
                 'body' => $this->generateRandomBody(),
+                'date_publish'=> date('Y-m-d H:i:s'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ];

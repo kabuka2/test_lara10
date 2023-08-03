@@ -12,6 +12,13 @@
                         {{ $post->name }}
                     </h2>
                 </div>
+                @if(!empty($post->image))
+                    <div class = "posts-block-image">
+
+                        <img class="fit-picture" src="{{$post->image}}" alt="post_image">
+
+                    </div>
+                @endif
                 <div class="posts-block-body">
                     <p>{{ $post->body }}</p>
                     <button class="expand-btn">Read more</button>

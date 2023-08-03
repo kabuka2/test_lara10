@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec577e325c525d80587b1912ca9668b2",
+    "content-hash": "5f808b9f8fc47ea6534fc21f68009a70",
     "packages": [
         {
             "name": "brick/math",
@@ -2383,6 +2383,52 @@
                 }
             ],
             "time": "2023-02-25T19:38:58+00:00"
+        },
+        {
+            "name": "pppcreative/date-picker",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PPP-Peter/nova-date-picker.git",
+                "reference": "ccae19f3bc40df4be80fe2cfaa86932b45579a63"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PPP-Peter/nova-date-picker/zipball/ccae19f3bc40df4be80fe2cfaa86932b45579a63",
+                "reference": "ccae19f3bc40df4be80fe2cfaa86932b45579a63",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wame\\DatePicker\\CardServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wame\\DatePicker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel Nova Mupltiple Date Picker -  multiple graphs date pick , refresh graphs, show logged user data",
+            "keywords": [
+                "date picker",
+                "laravel",
+                "nova"
+            ],
+            "support": {
+                "issues": "https://github.com/PPP-Peter/nova-date-picker/issues",
+                "source": "https://github.com/PPP-Peter/nova-date-picker/tree/1.2"
+            },
+            "time": "2023-06-23T10:33:14+00:00"
         },
         {
             "name": "psr/container",

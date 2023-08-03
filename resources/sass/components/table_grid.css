@@ -1,0 +1,18 @@
+.card-body {
+  width: 100%;
+  display: block;
+  margin-top: 40px;
+  border: 1px solid;
+  padding: 25px;
+}
+.card-body > .table {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  max-height: 400px;
+}
+.card-body > .table > .thead > tr > td > input {
+  width: 100%;
+}
+
+/*# sourceMappingURL=table_grid.css.map */

@@ -10,7 +10,8 @@
         "itstructure/laravel-grid-view": "~1.0.11",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "pppcreative/date-picker": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

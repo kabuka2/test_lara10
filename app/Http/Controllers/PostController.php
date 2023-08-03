@@ -7,6 +7,7 @@ use App\Http\Services\PostsService;
 use App\Http\Requests\ShowFromUserPageRequest;
 use App\Http\Requests\PostCreateRequest;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\PostEditRequest;
 
 class PostController extends Controller
 {
@@ -61,35 +62,48 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ShowFromUserPageRequest $request)
     {
-        //
-    }
-
-    public function showFromUserPage(ShowFromUserPageRequest $request)
-    {
-
-        $id = $request->id;
+        $id = (int)$request->id;
         $post = current($this->service->getPostAndCommentsById($id));
 
         return view('post_page', ['post' => current($post)]);
-
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        $item = $this->service->edit($id);
+        if(!$item){
+            abort(404);
+        }
+        return view('post',  compact('item'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostCreateRequest $request, int $id)
     {
-        //
+
+        $data = $request;
+
+        try {
+            $res = $this->service->update($id,$data);
+
+            return redirect()->route(
+                'post.user.show',
+                [
+                    'id' => $res['id']
+                ]
+            )->with('success', 'Item saved successfully.');
+
+        } catch (\Exception){
+            return view('post')->withErrors(['error' => 'Failed to save the item. Please try again.']);
+        }
+
     }
 
     /**
@@ -97,7 +111,7 @@ class PostController extends Controller
      */
     public function destroy(ShowFromUserPageRequest $request)
     {
-        $id = $request->id;
+        $id = (int)$request->id;
         $this->service->softDelete($id);
         return redirect('post-list');
     }

@@ -6,15 +6,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Filterable;
 
 class Posts extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Filterable;
 
     protected $table = 'posts';
 
-    const NUMBER_RECORDS_ONE_PAGE = 15;
+    const NUMBER_RECORDS_ONE_PAGE = 10;
 
     public function comments()
     {

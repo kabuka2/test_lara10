@@ -4,10 +4,9 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\PostsRepository;
+use App\Models\Posts;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\PostCreateRequest;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 
 class PostsService extends CoreService
@@ -24,9 +23,9 @@ class PostsService extends CoreService
        return $this->repository->getAllPostGridTable();
     }
 
-    public function getAllPostsPagination():LengthAwarePaginator
+    public function getAllPostsPagination($search):LengthAwarePaginator
     {
-       return $this->repository->getAllPostsPagination();
+       return $this->repository->getAllPostsPagination($search);
     }
 
     /**
@@ -40,7 +39,7 @@ class PostsService extends CoreService
     public function softDelete(int $id)
     {
         try {
-            $this->repository->softDeleteRecords($id);
+            $res_delete = $this->repository->softDeleteRecords($id);
         } catch (\Exception $e) {
             $this->error(0,$e->getMessage());
         }
@@ -49,54 +48,44 @@ class PostsService extends CoreService
     public function savePost(PostCreateRequest $data):array
     {
 
-        if ($data->hasFile('image')) {
-            $image = $data->file('image');
-            $data->image_path = $this->saveFilesImages($image);
-        }
-
         try {
-
            $result =  $this->repository->createNewRecords($data);
            return ['id'=> $result];
-
         } catch (\Exception $e){
             if(isset($data->image_path)) {
                 $this->unlinkFileImage($data->image_path);
             }
-
             $this->errors(1);
         }
 
     }
 
     /**
-     * @param UploadedFile $file
-     * @return string path to file
+     * @param int $id_post
+     * @return Posts|null
+    **/
+    public function edit(int $id_post):Posts|null
+    {
+        return $this->repository->getModelById($id_post);
+    }
+
+    /**
+     * @param int $post_id
+     * @param PostCreateRequest $data
      */
-    private function saveFilesImages(UploadedFile $file):string
+    public function update(int $post_id, PostCreateRequest $data)
     {
-        $image_name_info = pathinfo($file->getClientOriginalName());
-        $new_image_name = sprintf('%s.%s',
-            md5($image_name_info['filename'].time()),
-            $image_name_info['extension']
-        );
 
-        Storage::disk('public')->putFileAs('images\posts', $file, $new_image_name);
-        Storage::setVisibility($new_image_name, 'public');
+        try {
+            $result = $this->repository->updatePost($post_id,$data);
+            return ['id'=> $result];
+        } catch (\Exception $e){
+            $this->errors(1);
+        }
 
-        $publicUrl = asset('storage/images/posts/'.$new_image_name);
-        $publicUrlWithoutBase = str_replace(url('/'), '', $publicUrl);
-        return $publicUrlWithoutBase;
     }
 
-    private function unlinkFileImage(string $path_file):void
-    {
-      $path = pathinfo($path_file);
-      try{
-          Storage::delete($path['basename']);
-      } catch (\Exception $e){}
 
-    }
 
     /**
      * @inheritDoc

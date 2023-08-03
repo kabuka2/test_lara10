@@ -81,6 +81,16 @@
                 return sprintf('%s ...',mb_substr($row->body, 0, 30));
             },
         ],
+        'date_publish'=>[
+            'name'=> 'date_publish',
+            'label' => 'Date Publish',
+            'sort' => 'date_publish',
+            'attribute' => 'date_publish',
+            'htmlAttributes' => [
+                'width' => '15%'
+            ],
+
+        ],
 {{--        'status'=>[--}}
 {{--            'name'=> 'status',--}}
 {{--            'label' => 'Status',--}}
@@ -123,8 +133,8 @@
                 'view' => function($row){
                     return route('post.user.show', ['id' => $row->id]);
                 },
-                'edit' => function ($data) {
-                    return route('profile.edit_user', ['id' => $data->id]);
+                'edit' => function ($row) {
+                    return route('posts.edit', ['id' => $row->id]);
                 },
                 [
                     'class' => Itstructure\GridView\Actions\Delete::class,

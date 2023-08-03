@@ -61,4 +61,8 @@
   cursor: pointer;
 }
 
+img.fit-picture {
+  aspect-ratio: 16/9;
+}
+
 /*# sourceMappingURL=welcome_page.css.map */
