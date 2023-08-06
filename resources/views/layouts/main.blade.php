@@ -25,6 +25,7 @@
                         <a href="{{route('profile.edit')}}">My Profile</a>
                         <a href="{{ route('users') }}" class=>Users</a>
                         <a href="{{ route('post_list') }}" class=>Posts</a>
+                        <a href="{{ route('comment.list') }}" class=>Comments History</a>
                     @endauth
                 </div>
                 <div class="header__item header__right-menu">

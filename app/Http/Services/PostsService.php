@@ -39,7 +39,7 @@ class PostsService extends CoreService
     public function softDelete(int $id)
     {
         try {
-            $res_delete = $this->repository->softDeleteRecords($id);
+            $this->repository->softDeleteRecords($id);
         } catch (\Exception $e) {
             $this->error(0,$e->getMessage());
         }
@@ -47,10 +47,12 @@ class PostsService extends CoreService
     /**@param PostCreateRequest $data * */
     public function savePost(PostCreateRequest $data):array
     {
+
         try {
            $result =  $this->repository->createNewRecords($data);
            return ['id'=> $result];
         } catch (\Exception $e){
+            dd($e->getMessage());
             $this->error(1);
         }
 

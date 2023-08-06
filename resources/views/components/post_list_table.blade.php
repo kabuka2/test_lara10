@@ -4,7 +4,7 @@
     'paginatorOptions' => [
         'pageName' => 'post'
     ],
-    'rowsPerPage' => 15,
+    'rowsPerPage' => 10,
     'strictFilters' => true,
     'rowsFormAction' => route('post_list'),
     'columnOptions' => [

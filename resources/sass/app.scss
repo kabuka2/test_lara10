@@ -1,9 +1,11 @@
+@import "/node_modules/bootstrap/scss/bootstrap";
 @import "/resources/css/app.css";
 @import "/resources/sass/pages/welcome_page";
 @import "/resources/sass/layouts/layout_main";
 @import "/resources/sass/pages/post_page";
 @import "/resources/sass/components/table_grid";
 @import "/resources/sass/components/datapicker";
+
 
 :root{
     --color--text--header:blue;

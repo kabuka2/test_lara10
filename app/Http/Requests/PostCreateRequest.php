@@ -3,8 +3,8 @@
 
 namespace App\Http\Requests;
 
-
 use Illuminate\Foundation\Http\FormRequest;
+use \Carbon\Carbon;
 
 class PostCreateRequest extends FormRequest
 {
@@ -37,7 +37,7 @@ class PostCreateRequest extends FormRequest
 
         if ($this->has('date_publish')) {
             $datePublish = $this->input('date_publish');
-            $datePublish = \Carbon\Carbon::parse($datePublish)->format('Y-m-d');
+            $datePublish = Carbon::parse($datePublish)->format('Y-m-d');
             $this->merge(['date_publish' => $datePublish]);
         }
     }

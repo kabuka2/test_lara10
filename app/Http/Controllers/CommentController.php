@@ -20,8 +20,7 @@ class CommentController extends Controller
     public function index()
     {
         $dataProvider = $this->service->getAllCommentsGrid();
-
-        return view('comments_list',['dataProvider'=> $dataProvider]);
+        return view('comments_list',compact('dataProvider'));
     }
 
     /**

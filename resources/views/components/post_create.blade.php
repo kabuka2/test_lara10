@@ -1,9 +1,7 @@
 <section >
-
     <form method="post" action="{{ route('posts.store') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('put')
-
         <div class="py-12 post-create">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 post-block">
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
@@ -24,7 +22,6 @@
                     </div>
                 </div>
 
-
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <div class="max-w-xl post_body_block_input_name">
                         <div class="max-w-xl post_body_block_input_date">
@@ -39,8 +36,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <div class="max-w-xl">
                         <label for="formFile" class="form-label">Select image</label>
@@ -49,7 +44,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

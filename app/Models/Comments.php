@@ -15,8 +15,24 @@ class Comments extends Model
 
     public function user()
     {
-        return $this->hasMany(User::class, 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+//    public function posts()
+//    {
+//
+//        return $this->hasOne(Posts::class, 'id', 'post_id');
+//    }
+
+    public function posts()
+    {
+        return $this->hasOne(Posts::class,'id','post_id');
+    }
+
+//    public function posts()
+//    {
+//        return $this->hasMany(Comments::class, 'post_id', 'id');
+//    }
 
     public function getDeletedAtColumn()
     {

@@ -8,12 +8,12 @@ use App\Models\Posts as Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Carbon\Carbon;
 
 class PostsRepository extends CoreRepository
 {
@@ -32,7 +32,7 @@ class PostsRepository extends CoreRepository
                 $query->select(['name','id']);
             }])
             ->orderBy('date_publish', 'DESC')
-            ->orderBy('created_at', 'DESC')
+//            ->orderBy('created_at', 'DESC')
             ->filter($filter)
             ->paginate(Model::NUMBER_RECORDS_ONE_PAGE);
         return $posts;
@@ -119,6 +119,7 @@ class PostsRepository extends CoreRepository
      */
     public function createNewRecords(PostCreateRequest $data):int
     {
+
         if ($data->hasFile('image')) {
             $image = $data->file('image');
             $data->image_path = $this->saveFilesImages($image);
@@ -132,7 +133,8 @@ class PostsRepository extends CoreRepository
            $model->name = $data->input('name');
            $model->body = $data->input('body');
            $model->some_body = serialize($data->input('body'));
-           $model->date_publish = Carbon::createFromFormat('Y-m-d H:i:s', $data->date_publish);
+           $model->date_publish = Carbon::createFromFormat('Y-m-d', $data->date_publish)
+               ->format('Y-m-d H:i:s');
            $model->user_id = $user->id;
 
            if (isset($data->image_path)) {
@@ -144,7 +146,7 @@ class PostsRepository extends CoreRepository
 
            return $model->id;
        } catch (QueryException $e){
-
+           dd($e->getMessage());
            if(isset($data->image_path)) {
                $this->unlinkFileImage($data->image_path);
            }

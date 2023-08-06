@@ -38,4 +38,5 @@ class Posts extends Model
         return 'status';
     }
 
+
 }

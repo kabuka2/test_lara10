@@ -24,7 +24,6 @@ class PostController extends Controller
     public function index()
     {
        $dataProvider = $this->service->getAllPostGrid();
-
        return view('post_list',['dataProvider'=> $dataProvider]);
 
     }
@@ -45,18 +44,15 @@ class PostController extends Controller
         $data = $request;
         try {
             $res =  $this->service->savePost($data);
-
             return redirect()->route(
                 'post.user.show',
                 [
                     'id' => $res['id']
                 ]
             )->with('success', 'Item saved successfully.');
-
-        } catch (\Exception){
-            return view('post')->withErrors(['error' => 'Failed to save the item. Please try again.']);
+        } catch (\Exception $exception){
+            return redirect()->route(('posts.create')->with('danger', $exception->getMessage()));
         }
-
     }
 
     /**
