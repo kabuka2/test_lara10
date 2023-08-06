@@ -1,5 +1,6 @@
 import './bootstrap';
 import $ from "jquery";
+import 'bootstrap-datepicker';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
@@ -15,4 +16,15 @@ $(document).ready(function() {
             $(this).text('Read more');
         }
     });
+
+    $("#date_publish").datepicker({
+        calendarWeeks:false,
+        clearBtn:true,
+        format:"dd-mm-yyyy",
+        startDate:'currentDate',
+        todayBtn:true,
+        todayHighlight:true,
+        autoclose: true,
+    }).datepicker('setDate', $('#date_publish').val());
+
 });

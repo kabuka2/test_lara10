@@ -13,7 +13,8 @@ class PostFilter extends Filter
     public function name(string $name = ''):Builder|null
     {
         if (!empty($name)) {
-            return $this->builder->where('name', 'REGEXP', $name);
+            $escapedName = preg_quote($name, '/');
+            return $this->builder->where('name', 'REGEXP', $escapedName);
         }
         return $this->builder;
     }

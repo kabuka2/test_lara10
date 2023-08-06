@@ -3,11 +3,12 @@
 
 namespace App\Http\Repositories;
 use App\Http\Requests\PostCreateRequest;
-use App\Models\Comments;
+
 use App\Models\Posts as Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Itstructure\GridView\DataProviders\EloquentDataProvider;
 use Illuminate\Support\Facades\DB;
@@ -110,12 +111,14 @@ class PostsRepository extends CoreRepository
     }
 
     /**
-     * @param PostCreateRequest $data *
+     * @param PostCreateRequest $data * -
+     *  "name" => "rgergerg"
+        "body" => "ergergerg"
+        "date_publish" => "2023-08-06"
      * @return int id new records
      */
     public function createNewRecords(PostCreateRequest $data):int
     {
-
         if ($data->hasFile('image')) {
             $image = $data->file('image');
             $data->image_path = $this->saveFilesImages($image);
@@ -129,6 +132,7 @@ class PostsRepository extends CoreRepository
            $model->name = $data->input('name');
            $model->body = $data->input('body');
            $model->some_body = serialize($data->input('body'));
+           $model->date_publish = Carbon::createFromFormat('Y-m-d H:i:s', $data->date_publish);
            $model->user_id = $user->id;
 
            if (isset($data->image_path)) {

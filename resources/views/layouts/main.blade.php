@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+</head>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -29,7 +29,6 @@
                 </div>
                 <div class="header__item header__right-menu">
                     @auth
-{{--                        @include('layouts.navigation')--}}
                         <a href="{{ url('/logout') }}" class=>Logout</a>
                     @else
                         <div class="f-login-nav">
@@ -56,6 +55,7 @@
 <!-- Page Content -->
     <main>
         <div class="app-container">
+            <x-popup_error/>
         {{ $slot }}
         </div>
     </main>
@@ -63,10 +63,6 @@
 </body>
 
 <footer>
-
-
-
-
 </footer>
 
 </html>

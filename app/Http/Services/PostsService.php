@@ -47,15 +47,11 @@ class PostsService extends CoreService
     /**@param PostCreateRequest $data * */
     public function savePost(PostCreateRequest $data):array
     {
-
         try {
            $result =  $this->repository->createNewRecords($data);
            return ['id'=> $result];
         } catch (\Exception $e){
-            if(isset($data->image_path)) {
-                $this->unlinkFileImage($data->image_path);
-            }
-            $this->errors(1);
+            $this->error(1);
         }
 
     }
@@ -80,7 +76,7 @@ class PostsService extends CoreService
             $result = $this->repository->updatePost($post_id,$data);
             return ['id'=> $result];
         } catch (\Exception $e){
-            $this->errors(1);
+            $this->error(1);
         }
 
     }

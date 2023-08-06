@@ -8,6 +8,10 @@
   margin-top: 10px;
   padding: 0px 10px 0px 10px;
 }
+.post-create > .post-block > .custom-datepicker {
+  position: absolute;
+  z-index: 9999; /* Make sure the datepicker is on top of other elements */
+}
 .post-create > .post-block .post_block_input_body > div > .text-area-container {
   background: rgb(17 24 39/var(--tw-bg-opacity));
   width: 100%;

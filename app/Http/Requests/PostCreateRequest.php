@@ -28,9 +28,19 @@ class PostCreateRequest extends FormRequest
         return [
             'name' => ['string', 'max:255','required'],
             'body' => ['string', 'max:1000','required'],
+            'date_publish' => ['date','required']
         ];
     }
 
+    protected function prepareForValidation()
+    {
+
+        if ($this->has('date_publish')) {
+            $datePublish = $this->input('date_publish');
+            $datePublish = \Carbon\Carbon::parse($datePublish)->format('Y-m-d');
+            $this->merge(['date_publish' => $datePublish]);
+        }
+    }
 
 
 
