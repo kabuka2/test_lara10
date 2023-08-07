@@ -1,4 +1,4 @@
-import './bootstrap';
+
 import $ from "jquery";
 import 'bootstrap-datepicker';
 import Alpine from 'alpinejs';

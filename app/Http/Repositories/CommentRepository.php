@@ -17,11 +17,28 @@ class CommentRepository extends CoreRepository
 
     public function getAllCommentsGridTable():EloquentDataProvider
     {
-        $query = Model::select(['id','user_id','post_id','content','created_at','updated_at'])
-            ->where(['user_id'=>Auth::user()->id])
-            ->with(['posts' => function ($query) {
-                  return $query->select(['name','id']);
-            }]);
+        $query = $this->startCondition()::select([
+            'id',
+            'user_id',
+            'post_id',
+            'content',
+            'created_at',
+            'updated_at',
+        ])
+        ->where(['user_id'=>Auth::user()->id]);
+//        ->with(['posts' => function ($query) {
+//              return $query->select(['name','id']);
+//        }]);
         return new EloquentDataProvider($query);
     }
+
+    /**
+     * @param int $id_comments *
+     * @return Model|null
+     */
+    public function getModelById(int $id_comments):Model|null
+    {
+        return $this->startCondition()::find($id_comments);
+    }
+
 }

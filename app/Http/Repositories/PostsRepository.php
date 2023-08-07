@@ -61,7 +61,8 @@ class PostsRepository extends CoreRepository
             }])
             ->with(['user'=> function($query){
                 $query->select(['name','id']);
-            }])->limit(1)->get();
+            }])
+            ->get();
 
 
         $posts->transform(function ($post) {
@@ -71,6 +72,7 @@ class PostsRepository extends CoreRepository
             });
             return $post;
         });
+        $test = $posts;
 
         return $posts;
     }
@@ -201,8 +203,6 @@ class PostsRepository extends CoreRepository
             DB::rollback();
             throw new \Exception($e->getMessage(), 1);
         }
-
-
     }
 
     /**
@@ -233,8 +233,5 @@ class PostsRepository extends CoreRepository
         } catch (\Exception $e){}
 
     }
-
-
-
 
 }

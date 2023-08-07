@@ -4,6 +4,7 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\CommentRepository;
+use App\Models\Comments;
 
 class CommentService extends CoreService
 {
@@ -20,6 +21,14 @@ class CommentService extends CoreService
 
     }
 
+    /**
+     * @param int $id_comment *
+     * @return Comments|null
+    **/
+    public function getCommentsById(int $id_comment):Comments|null
+    {
+        return $this->repository->getModelById($id_comment);
+    }
 
 
     protected function errors(): array

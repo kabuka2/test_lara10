@@ -2,7 +2,7 @@
 <li class="comment-item">
     <div class="story__header">
         <div class="story__user user">
-            <span>{{ $comment->user[0]->name }}</span>
+            <span>{{ $comment->user->name }}</span>
             <span>{{ $comment->created_at }}</span>
         </div>
     </div>

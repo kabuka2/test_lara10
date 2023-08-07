@@ -52,7 +52,6 @@ class PostsService extends CoreService
            $result =  $this->repository->createNewRecords($data);
            return ['id'=> $result];
         } catch (\Exception $e){
-            dd($e->getMessage());
             $this->error(1);
         }
 

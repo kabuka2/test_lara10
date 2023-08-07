@@ -20,7 +20,7 @@ class CommentController extends Controller
     public function index()
     {
         $dataProvider = $this->service->getAllCommentsGrid();
-        return view('comments_list',compact('dataProvider'));
+        return view('comments.comments_list',compact('dataProvider'));
     }
 
     /**
@@ -34,25 +34,30 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(string $id)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $data = $this->service->getCommentsById((int)$request->id);
+
+        if (empty($data)) {
+            abort(404);
+        }
+
+        return view('comments.comments_edit',compact('data'));
     }
 
     /**
