@@ -18,6 +18,15 @@ class CommentService extends CoreService
     public function getAllCommentsGrid()
     {
         return $this->repository->getAllCommentsGridTable();
+    }
+
+    public function updateById($data)
+    {
+        try{
+            $this->repository->updateById($data);
+        } catch (\Exception $e){
+            $this->error(0,$e->getMessage());
+        }
 
     }
 

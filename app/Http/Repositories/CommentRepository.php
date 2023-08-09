@@ -41,4 +41,17 @@ class CommentRepository extends CoreRepository
         return $this->startCondition()::find($id_comments);
     }
 
+
+    public function updateById($data)
+    {
+        $model = $this->getModelById($data->id);
+        if (empty($model)){
+            throw new \Exception('Undefined comment');
+        }
+
+        $model->body = $data->body;
+        $model->save();
+
+    }
+
 }

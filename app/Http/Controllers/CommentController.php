@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Services\CommentService;
+use App\Http\Requests\CommentsUpdateRequest;
+use \Exception;
+use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
@@ -63,8 +66,15 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CommentsUpdateRequest $request)
     {
+      $data = $request;
+      try {
+          $this->service->updateById($data);
+          Redirect::route('comments.edit',['id'=> $data->id])->with('success','Success');
+      } catch (Exception $e){
+          Redirect::route('comments.edit')->with('warning',$e->getMessage());
+      }
 
     }
 
