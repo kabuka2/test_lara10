@@ -25,9 +25,8 @@ class CommentService extends CoreService
         try{
             $this->repository->updateById($data);
         } catch (\Exception $e){
-            $this->error(0,$e->getMessage());
+            $this->error(0);
         }
-
     }
 
     /**

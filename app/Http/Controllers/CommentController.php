@@ -55,7 +55,7 @@ class CommentController extends Controller
     public function edit(Request $request)
     {
         $data = $this->service->getCommentsById((int)$request->id);
-
+//        dd($data);
         if (empty($data)) {
             abort(404);
         }
@@ -71,9 +71,9 @@ class CommentController extends Controller
       $data = $request;
       try {
           $this->service->updateById($data);
-          Redirect::route('comments.edit',['id'=> $data->id])->with('success','Success');
+        return  Redirect::route('comments.edit',['id'=> $data->id])->with('success','Success');
       } catch (Exception $e){
-          Redirect::route('comments.edit')->with('warning',$e->getMessage());
+         return Redirect::route('comments.edit',['id'=> $data->id])->with('warning',$e->getMessage());
       }
 
     }

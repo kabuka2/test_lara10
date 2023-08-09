@@ -10,9 +10,9 @@
                     <div class="max-w-xl post_body_block_input_name">
                         <div class="max-w-xl post_body_block_input_date">
 
-                          <textarea name ="body">
+                          <textarea name ="content">
                             {{$data->content}}
-                            <x-input-error :messages="$errors->get('body')"></x-input-error>
+                            <x-input-error :messages="$errors->get('content')"></x-input-error>
                           </textarea>
 
                         </div>

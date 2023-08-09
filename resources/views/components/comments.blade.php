@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="posts-block-body">
-        <p>{{ $comment->content }}</p>
+        <p>{{ $comment->content}}</p>
     </div>
 
     <!-- Check if the comment has children -->

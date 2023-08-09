@@ -13,13 +13,7 @@
                 </div>
 
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg post_block_input_body">
-                    <div class="max-w-xl">
-                        <x-input-label for="post_body" :value="__('Post')" />
-                        <div class="text-area-container">
-                            <x-textarea-input class="text-post-body" id="post_body" name="body"></x-textarea-input>
-                        </div>
-                        <x-input-error value="{{old('name')}}" :messages="$errors->get('body')"></x-input-error>
-                    </div>
+n                    </div>
                 </div>
 
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">

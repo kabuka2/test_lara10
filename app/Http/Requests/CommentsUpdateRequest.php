@@ -24,7 +24,7 @@ class CommentsUpdateRequest  extends FormRequest
     public function rules(): array
     {
         return [
-            'body' => ['string', 'max:1000','required'],
+            'content' => ['string', 'max:1000','required'],
             'id'   => ['numeric', 'required']
         ];
     }
