@@ -1,68 +1,9 @@
-.posts-block-body > p {
-  max-height: 100px;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  margin-bottom: 20px;
-}
-.posts-block-body > .expanded p {
-  max-height: none;
-}
-
-.posts-block {
-  margin-bottom: 50px;
-}
-.posts-block .posts-block-post {
-  margin-top: 30px;
-  padding: 17px;
-  border-radius: 10px;
-  background: var(--color-bright-800);
-}
-.posts-block .posts-block-post > .story__header > .story__user {
-  padding: 15px 23px 16px;
-  position: relative;
-  justify-content: space-between;
-  display: flex;
-  margin-right: 20px;
-  font-size: inherit;
-  line-height: inherit;
-  white-space: nowrap;
-}
-.posts-block .posts-block-post > .story__header > .posts-block-post-name {
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-.posts-block .posts-block-post > .posts-block-footer {
-  margin-top: 20px;
-  user-select: none;
-}
-.posts-block .posts-block-post > .posts-block-footer > a > .posts-block-footer-count-users {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-.posts-block .posts-block-post > .posts-block-footer > a > .posts-block-footer-count-users > .image-icon-post-block {
-  margin-right: 5px;
-  cursor: pointer;
-}
-
 .pagination-posts {
   margin-bottom: 20px;
   display: flex;
   align-items: unset;
   flex-direction: column;
   justify-content: center;
-}
-
-.expand-btn {
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-img.fit-picture {
-  aspect-ratio: 16/9;
 }
 
 /*# sourceMappingURL=welcome_page.css.map */

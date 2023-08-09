@@ -15,11 +15,18 @@ class PostsSeeder extends Seeder
     {
         $arr = [];
 
-        for ($i = 0; $i < 10; $i++) {
+        $links_to_image = [
+            'https://dev.ua/storage/images/15/57/50/71/derived/8a53af08d4184ea599fff98509d7f9b6.jpg',
+            'https://preview.redd.it/49i3uht820k81.jpg?auto=webp&s=2c1d1b0d5ad51a6656daaca509f38881b18246f8',
+            'https://codingbootcamps.io/wp-content/uploads/m2.png',
+            'https://global.discourse-cdn.com/business7/uploads/replitteams/optimized/2X/9/9c65d672a957a94df4b584e9ae1efe8164104432_2_690x466.jpeg'
+        ];
+
+        for ($i = 0; $i < 11; $i++) {
             $arr[] = [
                 'user_id' => 1,
                 'name' => Str::random(10),
-                'image' => '/images/posts/7f3de99d94ed6b6b2a1cdcc449bf4f52.jpg',
+                'image' => $links_to_image[rand(0,count($links_to_image) -1)],
                 'some_body' => $this->generateRandomBody(),
                 'body' => $this->generateRandomBody(),
                 'date_publish'=> date('Y-m-d H:i:s'),
@@ -33,7 +40,7 @@ class PostsSeeder extends Seeder
 
     public function generateRandomBody(): string
     {
-        $numberOfWords = 2000;
+        $numberOfWords = 100;
         $wordsLength = 10;
         $separator = ' ';
         $randomBody = '';

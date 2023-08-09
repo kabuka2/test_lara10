@@ -1,5 +1,5 @@
 <x-main-layout>
-    {{$data->id}}
+
     <form method="post" action="{{route('comments.update',['id'=> $data->id])}}">
         @csrf
         @method('patch')

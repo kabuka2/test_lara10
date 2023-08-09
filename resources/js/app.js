@@ -7,6 +7,9 @@ window.Alpine = Alpine;
 
 Alpine.start();
 $(document).ready(function() {
+
+    const class_btn_save_comment = $('.save-comment-page-comment');
+
     $('.expand-btn').on('click', function() {
         $(this).prev('p').toggleClass('expanded');
 
@@ -26,5 +29,13 @@ $(document).ready(function() {
         todayHighlight:true,
         autoclose: true,
     }).datepicker('setDate', $('#date_publish').val());
+
+    class_btn_save_comment.on('click',function (){
+        console.log($(this).prev('textarea').val());
+
+
+
+    });
+
 
 });

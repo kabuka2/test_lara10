@@ -1,48 +1,147 @@
-.comment-item {
-    margin-left: 20px;
-}
+//.comment-item {
+//    margin-left: 20px;
+//}
+///** Post page **/
+//.posts-block{
+//    .posts-block{
+//        .posts-block-post{
+//            .posts-block-body{
+//                 > p {
+//                    max-height: 100px;
+//                    overflow: hidden;
+//                    transition: max-height 0.3s ease;
+//                    margin-bottom: 20px;
+//                }
+//                >.expanded{
+//                    max-height: unset;
+//                    min-height: 100px;
+//                    overflow: hidden;
+//                    transition: max-height 0.3s ease;
+//                    margin-bottom: 20px;
+//                }
+//            }
+//        }
+//    }
+//}
+///** cost create **/
+//.post-create {
+//    > .post-block {
+//        > div {
+//            > .post_body_block_input_name {
+//                > .post_body_input {
+//                    width: 100%;
+//                    height: 30px;
+//                    margin-top: 10px;
+//                    padding: 0px 10px 0px 10px;
+//                }
+//            }
+//        }
+//        >  .custom-datepicker {
+//            position: absolute;
+//            z-index: 9999; /* Make sure the datepicker is on top of other elements */
+//        }
+//
+//        .post_block_input_body {
+//            > div {
+//                > .text-area-container {
+//                    background: rgb(17 24 39 / var(--tw-bg-opacity));
+//                    width: 100%;
+//                    height: 100%;
+//                    padding: 10px;
+//                    display: flex;
+//                    margin-top: 10px;
+//
+//                    .text-post-body {
+//                        width: 100%;
+//                        min-height: 30px;
+//                        resize: none;
+//                        overflow-y: hidden;
+//                        box-sizing: border-box;
+//                        border: none;
+//
+//                        &:focus {
+//                            border: none;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
-.post-create {
-    > .post-block {
-        > div {
-            > .post_body_block_input_name {
-                > .post_body_input {
-                    width: 100%;
-                    height: 30px;
-                    margin-top: 10px;
-                    padding: 0px 10px 0px 10px;
-                }
+
+
+.posts-block {
+    margin-bottom: 50px;
+
+    .posts-block-post {
+        margin-top: 30px;
+        padding: 17px;
+        border-radius: 10px;
+        background: var(--color-bright-800);
+        .posts-block-body{
+            > p {
+                max-height: 100px;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                margin-bottom: 20px;
+            }
+            >.expanded{
+                max-height: unset;
+                min-height: 100px;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                margin-bottom: 20px;
             }
         }
-        >  .custom-datepicker {
-            position: absolute;
-            z-index: 9999; /* Make sure the datepicker is on top of other elements */
+
+        > .story__header {
+            > .story__user {
+                padding: 15px 23px 16px;
+                position: relative;
+                justify-content: space-between;
+                display: flex;
+                margin-right: 20px;
+                font-size: inherit;
+                line-height: inherit;
+                white-space: nowrap;
+            }
+
+            > .posts-block-post-name {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
         }
 
-        .post_block_input_body {
-            > div {
-                > .text-area-container {
-                    background: rgb(17 24 39 / var(--tw-bg-opacity));
-                    width: 100%;
-                    height: 100%;
-                    padding: 10px;
+        > .posts-block-footer {
+            margin-top: 20px;
+            user-select: none;
+            > a {
+                > .posts-block-footer-count-users {
                     display: flex;
-                    margin-top: 10px;
-
-                    .text-post-body {
-                        width: 100%;
-                        min-height: 30px;
-                        resize: none;
-                        overflow-y: hidden;
-                        box-sizing: border-box;
-                        border: none;
-
-                        &:focus {
-                            border: none;
-                        }
+                    justify-content: flex-start;
+                    align-items: center;
+                    > .image-icon-post-block {
+                        margin-right: 5px;
+                        cursor: pointer;
                     }
                 }
             }
         }
     }
 }
+
+
+
+.expand-btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+img.fit-picture {
+    aspect-ratio: 16/9;
+}
+
