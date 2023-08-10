@@ -4,6 +4,7 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\PostsRepository;
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Posts;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\PostCreateRequest;
@@ -70,9 +71,8 @@ class PostsService extends CoreService
      * @param int $post_id
      * @param PostCreateRequest $data
      */
-    public function update(int $post_id, PostCreateRequest $data)
+    public function update(int $post_id, PostUpdateRequest $data)
     {
-
         try {
             $result = $this->repository->updatePost($post_id,$data);
             return ['id'=> $result];

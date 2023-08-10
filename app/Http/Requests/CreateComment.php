@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostEditRequest extends FormRequest
+class CreateComment extends FormRequest
 {
 
     /**
@@ -24,7 +24,9 @@ class PostEditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'numeric',
+            'post_id' => 'required|integer',
+            'parent_comment_id' => 'nullable|integer',
+            'message' => 'required|string|max:255'
         ];
     }
 

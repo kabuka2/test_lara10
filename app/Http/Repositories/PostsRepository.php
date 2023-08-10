@@ -4,6 +4,7 @@
 namespace App\Http\Repositories;
 use App\Http\Requests\PostCreateRequest;
 
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Posts as Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -168,7 +169,11 @@ class PostsRepository extends CoreRepository
          return $this->startCondition()::find($id_post);
     }
 
-    public function updatePost(int $post_id, PostCreateRequest $data )
+    /**
+     * @param int $post_id
+     * @param PostUpdateRequest $data
+    **/
+    public function updatePost(int $post_id, PostUpdateRequest $data )
     {
 
         $model = $this->getModelById($post_id);

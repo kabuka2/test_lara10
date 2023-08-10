@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Services\PostsService;
 use App\Http\Requests\ShowFromUserPageRequest;
 use App\Http\Requests\PostCreateRequest;
-use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\PostEditRequest;
+use App\Http\Requests\PostUpdateRequest;
 
 class PostController extends Controller
 {
@@ -71,7 +69,8 @@ class PostController extends Controller
      */
     public function edit(int $id)
     {
-        $item = $this->service->edit($id);
+        $id_post = $id;
+        $item = $this->service->edit($id_post);
         if(!$item){
             abort(404);
         }
@@ -81,9 +80,8 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostCreateRequest $request, int $id)
+    public function update(PostUpdateRequest $request, int $id)
     {
-
         $data = $request;
 
         try {

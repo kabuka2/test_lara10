@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateComment;
 use Illuminate\Http\Request;
 use App\Http\Services\CommentService;
 use App\Http\Requests\CommentsUpdateRequest;
@@ -37,8 +38,12 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(string $id)
+    public function store(CreateComment $request)
     {
+        $data = $request;
+        $result = $this->service->createComment($data);
+
+        return response()->json($result);
     }
 
     /**
