@@ -39,19 +39,18 @@ $(document).ready(function() {
 
     class_btn_save_comment.on('click',function () {
 
-        const text = $(this).prev('textarea').val();
-        const data_info = $(this).parent().parent('.posts-block-body');
-        console.log(ajaxSend(
+        const text = $(this).parent().prev('div.comment-content').find('textarea');
+        ajaxSend(
             '/comment-create',
             'html',
             'put',
             {
-                'post_id': data_info.attr('data-post-id'),
-                'parent_comment_id':data_info.attr('data-id'),
-                'message':text
-                },
+                'post_id': $(this).attr('data-post-id'),
+                'parent_comment_id':$(this).attr('data-parent-id'),
+                'message':text.val()
+            },
             addPost
-        ));
+        );
 
     });
 

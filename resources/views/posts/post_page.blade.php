@@ -14,20 +14,19 @@
                 </div>
                 @if(!empty($post->image))
                     <div class = "posts-block-image">
-
                         <img class="fit-picture" src="{{$post->image}}" alt="post_image">
-
                     </div>
                 @endif
                 <div class="posts-block-body">
-                    <p>{{ $post->body }}</p>
+                    <p>{{$post->body}}</p>
                     <button class="expand-btn">Read more</button>
                 </div>
                 <div class="post-comments">
+                    <x-comments.ui.add-comment-block :parent_id="0" :post_id="$post->id"/>
                     @if(count($post->comments) > 0)
                         <ul>
                             @foreach($post->comments as $comment)
-                                @include('components.comments', ['comment' => $comment])
+                                <x-comments.comments :comment="$comment"></x-comments.comments>
                             @endforeach
                         </ul>
                     @else

@@ -19,7 +19,7 @@ class PostsSeeder extends Seeder
             'https://dev.ua/storage/images/15/57/50/71/derived/8a53af08d4184ea599fff98509d7f9b6.jpg',
             'https://preview.redd.it/49i3uht820k81.jpg?auto=webp&s=2c1d1b0d5ad51a6656daaca509f38881b18246f8',
             'https://codingbootcamps.io/wp-content/uploads/m2.png',
-            'https://global.discourse-cdn.com/business7/uploads/replitteams/optimized/2X/9/9c65d672a957a94df4b584e9ae1efe8164104432_2_690x466.jpeg'
+           // 'https://global.discourse-cdn.com/business7/uploads/replitteams/optimized/2X/9/9c65d672a957a94df4b584e9ae1efe8164104432_2_690x466.jpeg'
         ];
 
         for ($i = 0; $i < 11; $i++) {
@@ -40,8 +40,8 @@ class PostsSeeder extends Seeder
 
     public function generateRandomBody(): string
     {
-        $numberOfWords = 100;
-        $wordsLength = 10;
+        $numberOfWords = 10;
+        $wordsLength = 5;
         $separator = ' ';
         $randomBody = '';
 

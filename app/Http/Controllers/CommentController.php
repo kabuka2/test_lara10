@@ -60,7 +60,7 @@ class CommentController extends Controller
     public function edit(Request $request)
     {
         $data = $this->service->getCommentsById((int)$request->id);
-//        dd($data);
+
         if (empty($data)) {
             abort(404);
         }

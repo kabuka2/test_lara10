@@ -8,7 +8,7 @@
             </a>
         @endauth
 
-        <x-post-search/>
+        <x-posts.post-search/>
 
         @foreach ($data->withPath('/') as $post)
             <div class="posts-block-post">

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Carbon\Carbon;
+use App\Components\Api\JsonPlaceholderApi;
 
 class PostsRepository extends CoreRepository
 {
@@ -33,7 +34,7 @@ class PostsRepository extends CoreRepository
                 $query->select(['name','id']);
             }])
             ->orderBy('date_publish', 'DESC')
-//            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->filter($filter)
             ->paginate(Model::NUMBER_RECORDS_ONE_PAGE);
         return $posts;
@@ -149,7 +150,6 @@ class PostsRepository extends CoreRepository
 
            return $model->id;
        } catch (QueryException $e){
-           dd($e->getMessage());
            if(isset($data->image_path)) {
                $this->unlinkFileImage($data->image_path);
            }
@@ -238,5 +238,16 @@ class PostsRepository extends CoreRepository
         } catch (\Exception $e){}
 
     }
+
+    /***************************post api ****************************/
+
+    /**@param int $page_id **/
+    public function getPostsToApi(int $page_id)
+    {
+      $res = (new JsonPlaceholderApi())->getPost($page_id);
+      return $res;
+    }
+
+
 
 }

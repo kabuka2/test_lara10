@@ -46,7 +46,7 @@ class PostsService extends CoreService
         }
     }
     /**@param PostCreateRequest $data * */
-    public function savePost(PostCreateRequest $data):array
+    public function savePost(PostCreateRequest $data): array
     {
 
         try {
@@ -80,6 +80,18 @@ class PostsService extends CoreService
             $this->error(1);
         }
 
+    }
+
+    /******************************* my api post ****************************/
+
+    /**
+     * @param int $page_id
+    **/
+    public function getPostsToApi(int $page_id = 1): array
+    {
+        $res = $this->repository->getPostsToApi($page_id);
+
+        return $res;
     }
 
 

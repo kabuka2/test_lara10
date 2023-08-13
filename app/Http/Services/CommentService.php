@@ -44,7 +44,7 @@ class CommentService extends CoreService
                 $data->input('message'),
                 $data->input('parent_comment_id') ?? 0
             );
-            return ['id'=> $create_comment];
+            return $create_comment;
         } catch (\Exception $e) {
             $this->error(1);
         }

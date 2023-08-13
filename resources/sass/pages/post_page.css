@@ -9,13 +9,14 @@
 }
 .posts-block .posts-block-post .posts-block-body > p {
   max-height: 100px;
+  min-height: 10px;
   overflow: hidden;
   transition: max-height 0.3s ease;
   margin-bottom: 20px;
 }
 .posts-block .posts-block-post .posts-block-body > .expanded {
   max-height: unset;
-  min-height: 100px;
+  min-height: 10px;
   overflow: hidden;
   transition: max-height 0.3s ease;
   margin-bottom: 20px;

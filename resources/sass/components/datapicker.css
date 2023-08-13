@@ -1,0 +1,14 @@
+@import '/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css';
+.datepicker.datepicker-dropdown {
+  position: absolute;
+  background-color: var(--color-background-block);
+  border: 1px solid var(--color-border-focus);
+}
+.datepicker.datepicker-dropdown > .datepicker-days > .table-condensed .prev:hover, .datepicker.datepicker-dropdown > .datepicker-days > .table-condensed .next:hover {
+  background-color: var(--color-border-focus);
+}
+.datepicker.datepicker-dropdown > .datepicker-days > .table-condensed .datepicker-switch:hover {
+  background-color: var(--color-border-focus);
+}
+
+/*# sourceMappingURL=datapicker.css.map */

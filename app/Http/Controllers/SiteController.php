@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\PostsService;
-use App\Models\Posts;
-use Illuminate\Http\Request;
 use App\Http\Filter\PostFilter;
+
 
 class SiteController extends Controller
 {
@@ -14,8 +13,7 @@ class SiteController extends Controller
     {
         $posts = (new PostsService())->getAllPostsPagination($request);
 
-        return view('welcome', ['data' => $posts]);
+        return view('posts.welcome', ['data' => $posts]);
     }
-
 
 }

@@ -59,9 +59,9 @@ class CommentRepository extends CoreRepository
      * @param int $post_id
      * @param string $message
      * @param int $parent_comment_id
-     * @return int | Exception
+     * @return array | Exception
     **/
-    public function createComment(int $post_id, string $message, int $parent_comment_id = 0):int|Exception
+    public function createComment(int $post_id, string $message, int $parent_comment_id = 0):array|Exception
     {
         DB::beginTransaction();
         try {
@@ -74,7 +74,12 @@ class CommentRepository extends CoreRepository
             $model->save();
 
             DB::commit();
-            return $model->id;
+            return [
+                'comment_id'=> $model->id,
+                'post_id'=>$post_id,
+                'parent_id'=>$parent_comment_id,
+                'message'=>$message
+            ];
         } catch (QueryException $e){
             DB::rollback();
             throw new \Exception($e->getMessage(), 1);

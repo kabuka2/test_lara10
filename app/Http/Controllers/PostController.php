@@ -22,7 +22,7 @@ class PostController extends Controller
     public function index()
     {
        $dataProvider = $this->service->getAllPostGrid();
-       return view('post_list',['dataProvider'=> $dataProvider]);
+       return view('posts.post_list',['dataProvider'=> $dataProvider]);
 
     }
 
@@ -31,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post');
+        return view('posts.post');
     }
 
     /**
@@ -47,7 +47,7 @@ class PostController extends Controller
                 [
                     'id' => $res['id']
                 ]
-            )->with('success', 'Item saved successfully.');
+            )->with('success','Item saved successfully.');
         } catch (\Exception $exception){
             return redirect()->route(('posts.create')->with('danger', $exception->getMessage()));
         }
@@ -61,7 +61,7 @@ class PostController extends Controller
         $id = (int)$request->id;
         $post = current($this->service->getPostAndCommentsById($id));
 
-        return view('post_page', ['post' => current($post)]);
+        return view('posts.post_page', ['post' => current($post)]);
     }
 
     /**
@@ -74,7 +74,7 @@ class PostController extends Controller
         if(!$item){
             abort(404);
         }
-        return view('post',  compact('item'));
+        return view('posts.post',  compact('item'));
     }
 
     /**

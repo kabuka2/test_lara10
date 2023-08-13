@@ -14,7 +14,7 @@ class UserController extends Controller
         $service = new UsersService;
         $dataProvider = $service->getGridTableUsers();
 
-        return view('users', compact('dataProvider'));
+        return view('users.users', compact('dataProvider'));
 
     }
 }
