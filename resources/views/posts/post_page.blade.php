@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
     <x-main-layout>
         <div class="posts-block">
             <div class="posts-block-post">

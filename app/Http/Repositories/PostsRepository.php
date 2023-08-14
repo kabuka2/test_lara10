@@ -66,15 +66,13 @@ class PostsRepository extends CoreRepository
             }])
             ->get();
 
-
         $posts->transform(function ($post) {
             $posts = $this->buildCommentTree($post->comments);
             $post->comments = array_filter($posts,function ($data){
-                return is_null($data->patent_id);
+                return is_null($data->parent_id);
             });
             return $post;
         });
-        $test = $posts;
 
         return $posts;
     }
@@ -248,6 +246,21 @@ class PostsRepository extends CoreRepository
       return $res;
     }
 
+    /**
+      @param int $post_id
+    **/
+    public function getPostByIdToApi(int $post_id)
+    {
+        $result = (new JsonPlaceholderApi())->getPostById($post_id);
+        $res = collect([$result]);
 
-
+        $res->transform(function ($post) {
+            $posts = $this->buildCommentTree($post->comments);
+            $post->comments = array_filter($posts,function ($data){
+                return is_null($data->parent_id);
+            });
+            return $post;
+        });
+        return $result;
+    }
 }

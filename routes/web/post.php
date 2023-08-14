@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\PostsApiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 Route::middleware(['web'])->group(function(){
-    Route::get('/posts_api/{id}', [PostController::class, 'show'])->name('post.user.show');
-
+    Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.user.show');
     Route::get('/posts_api', [PostsApiController::class, 'index'])->name('post_api.user.show');
+    Route::get('/posts_api/{id}',[PostsApiController::class,'show'])->name('post_api.show');
 });
 
 

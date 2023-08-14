@@ -48,9 +48,11 @@ class PostsApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        $id = (int)$request->id;
+        $post =  $this->service->getPostAndCommentsByPostId($id);
+        return view('posts.post_page',compact('post'));
     }
 
     /**

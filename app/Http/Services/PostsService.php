@@ -94,6 +94,12 @@ class PostsService extends CoreService
         return $res;
     }
 
+    public function getPostAndCommentsByPostId(int $post_id)
+    {
+       $data = $this->repository->getPostByIdToApi($post_id);
+       return $data;
+    }
+
 
 
     /**
